@@ -1,0 +1,18 @@
+{
+    "contents" : "head(all.off)\n\nhead(tasktime.table)\n\nsubdata<-subset(all.off, task%in%c(\"nav_entry_1\",\"nav_entry_2\",\"nav_cancel_1\",\"nav_cancel_2\", \"radiom_4\",\"radiom_6\"))\nggplot(subdata, aes(x=task))+geom_bar()+facet_wrap(~car)\n\nsubdata$long_glance[subdata$duration>2]<-1\nsubdata$long_glance[subdata$duration<=2]<-0\nsum.table<-ddply(subdata, .(new_subject,task,car), summarise,\n                 mean_off_duration = mean(duration),\n                 sum_long_off_glance = sum(long_glance),\n                 total_off_time = sum(duration),\n                 frequency_off_glance = length(look))\n\nhead(sum.table)\nsum.table<-join(sum.table, tasktime.table, by=c(\"new_subject\",\"task\"))\nsum.table$percentage_long_off_glance <- sum.table$sum_long_off_glance/sum.table$frequency_off_glance*100\nsum.table$frequency_off_glance_per_minute <- 60*sum.table$frequency_off_glance/sum.table$task_time\n\nwrite.csv(sum.table, \"~/Dropbox/Works/R codes/MIT/Shiny/App-2/sumtable.csv\")\n",
+    "created" : 1460044178633.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1637717159",
+    "id" : "48A65BEB",
+    "lastKnownWriteTime" : 0,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

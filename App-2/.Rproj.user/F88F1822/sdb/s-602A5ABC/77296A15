@@ -1,0 +1,17 @@
+{
+    "contents" : "library(ggplot2)\nlibrary(reshape2)\nlibrary(plyr)\nlibrary(dplyr)\nlibrary(shiny)\n\n# package (which generally comes preloaded).\ndata<-read.csv(\"sumtable.csv\")\n#data<-read.csv(\"~/Dropbox/Works/R codes/MIT/Shiny/App-1/shiny_buffer.csv\")\n\n# Define a server for the Shiny app\nshinyServer(function(input, output) {\n  \n  # Plot\n  output$glancePlot <- renderPlot(width=\"auto\", height=\"auto\", {\n    \n    # Render a barplot\n    taskdata<-subset(data, task==input$task_name)\n    colnumber <- which(colnames(data)==input$variable_name)\n    taskdata[,colnumber] = round(taskdata[,colnumber], digits = 2)\n    taskdata[,colnumber] = as.numeric(taskdata[,colnumber])\n   \n    \n    ggplot(taskdata, aes(x=car, y=eval(parse(text=input$variable_name))))+stat_summary(fun.y=\"mean\", size=5, geom = \"point\",aes(colour=car))+theme_bw(16)+ \n      theme(axis.text.x = element_text(angle = 45, hjust = 1))+\n      ylab(input$variable_name)+xlab(\"Systems\")#+ggtitle(input$task_name)\n    \n  })\n  output$glancePlot2 <- renderPlot(width=\"auto\", height=\"auto\", {\n    \n    # Render a barplot\n    taskdata<-subset(data, task==input$task_name)\n    colnumber <- which(colnames(data)==input$variable_name)\n    taskdata[,colnumber] = round(taskdata[,colnumber], digits = 2)\n    taskdata[,colnumber] = as.numeric(taskdata[,colnumber])\n    \n    \n    ggplot(taskdata, aes(x=car, y=eval(parse(text=input$variable_name))))+stat_summary(fun.y=\"mean\", size=5, geom = \"bar\",aes(fill=car),width=0.2)+theme_bw(16)+ \n      theme(axis.text.x = element_text(angle = 45, hjust = 1))+geom_jitter(width=0.2, alpha=I(.3))+\n      ylab(input$variable_name)+xlab(\"Systems\")#+ggtitle(input$task_name)\n    \n  })\n})",
+    "created" : 1460043524758.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1238076146",
+    "id" : "77296A15",
+    "lastKnownWriteTime" : 1460053820,
+    "path" : "~/Dropbox/Works/R codes/MIT/Shiny/App-2/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

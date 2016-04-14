@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\n\n# Define the overall UI\nshinyUI(\n  \n  # Use a fluid Bootstrap layout\n  fluidPage(    \n    \n    # Give the page a title\n    titlePanel(\"MIT AgeLab Glance Analysis Tool (MAGAT)\"),\n    \n    # Generate a row with a sidebar\n    sidebarLayout(      \n      \n      # Define the sidebar with two inputs\n      sidebarPanel(\n        selectInput(\"task_name\", \"Task name:\", \n                    c(\"Navigation entry (1st trial)\" = \"nav_entry_1\",\n                      \"Navigation entry (2nd trial)\" = \"nav_entry_2\",\n                      \"Navigation cancel (1st trial)\" = \"nav_cancel_1\",\n                      \"Navigation cancel (2nd trial)\" = \"nav_cancel_2\",\n                      \"Manual radio tuning (1st trial)\" = \"radiom_4\",\n                      \"Manual radio tuning (2nd trial)\" = \"radiom_6\"\n                    )),\n        \n        selectInput(\"variable_name\", \"Variable name:\", \n                    c(\"Mean of single off-road glance duration\" = \"mean_off_duration\",\n                      \"Total off-road glance time\" = \"total_off_time\",\n                      \"Percentage of long off-road glances\" = \"percentage_long_off_glance\",\n                      \"Frequency of off-road glances per minute\" = \"frequency_off_glance_per_minute\")),\n        \n        hr(),\n        helpText(\"(details of technical reports and NHTSA guideline will be added here)\")\n        \n      ),\n      \n      # Create a spot for the barplot\n      mainPanel(\n        plotOutput(\"glancePlot2\"),  \n        plotOutput(\"glancePlot\")\n      )\n      \n    )\n  )\n)",
+    "created" : 1460043524573.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2636971495",
+    "id" : "155049DB",
+    "lastKnownWriteTime" : 1460054091,
+    "path" : "~/Dropbox/Works/R codes/MIT/Shiny/App-2/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
